@@ -9,19 +9,14 @@ SRC_URI = "https://www.torproject.org/dist/tor-${PV}.tar.gz"
 DEPENDS = "libevent openssl"
 inherit autotools gettext 
 
-
-#EXTRA_OECONF = "--with-libc --enable-ipv6 --with-libssl-prefix=${STAGING_DIR_HOST} \
-#                --with-ssl=openssl --disable-rpath --disable-iri"
-
-
 do_install_append () {
 
 cat > ${D}${sysconfdir}/tor/torrc <<EOF
 
 SocksPort 9050 # Default: Bind to localhost:9050 for local connections.
-SocksPort 192.168.2.134:9050 # Bind to this address:port too.
+SocksPort 192.168.XXX.XXX:9050 # Bind to this address:port too.
 
-SocksPolicy accept 192.168.2.0/24
+SocksPolicy accept 192.168.XXX.0/24
 
 EOF
 }
