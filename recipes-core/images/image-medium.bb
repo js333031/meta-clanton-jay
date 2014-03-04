@@ -1,9 +1,6 @@
 DESCRIPTION = "A fully functional image to be placed on SD card"
 
 IMAGE_INSTALL = "packagegroup-core-boot ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL}"
-IMAGE_INSTALL += "galileo-target"
-IMAGE_INSTALL += "mtd-utils-jffs2"
-
 
 IMAGE_LINGUAS = " "
 
@@ -36,11 +33,5 @@ IMAGE_INSTALL += "linux-firmware-iwlwifi-135-6"
 
 IMAGE_INSTALL += "e2fsprogs-mke2fs e2fsprogs-e2fsck dosfstools util-linux-mkfs"
 
-IMAGE_INSTALL += "tor ntp-tickadj ntp ntpdate ntp-utils lighttpd "
+IMAGE_INSTALL += "ntp lighttpd"
 EXTRA_IMAGEDEPENDS = "grub-conf"
-
-ROOTFS_POSTPROCESS_COMMAND += "install_sketch ; "
-
-install_sketch() {
-        install -d ${IMAGE_ROOTFS}/sketch
-}
