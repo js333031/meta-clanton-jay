@@ -1,5 +1,7 @@
 DESCRIPTION = "A fully functional image to be placed on SD card"
 
+ROOTFS_POSTPROCESS_COMMAND += "install_sketch ; "
+
 IMAGE_INSTALL = "packagegroup-core-boot ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL}"
 
 IMAGE_LINGUAS = " "
@@ -28,10 +30,20 @@ IMAGE_INSTALL += "nodejs"
 IMAGE_INSTALL += "wireless-tools wpa-supplicant bluez4"
 IMAGE_INSTALL += "ppp openssh"
 
+IMAGE_INSTALL += "galileo-target"
+IMAGE_INSTALL += "mtd-utils-jffs2"
+
 IMAGE_INSTALL += "linux-firmware-iwlwifi-6000g2a-6"
 IMAGE_INSTALL += "linux-firmware-iwlwifi-135-6"
 
 IMAGE_INSTALL += "e2fsprogs-mke2fs e2fsprogs-e2fsck dosfstools util-linux-mkfs"
 
-IMAGE_INSTALL += "ntp lighttpd"
+IMAGE_INSTALL += "ntp ntp-utils tor lighttpd"
 EXTRA_IMAGEDEPENDS = "grub-conf"
+
+
+
+install_sketch() {
+        install -d ${IMAGE_ROOTFS}/sketch
+}
+
