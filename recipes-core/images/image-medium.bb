@@ -26,11 +26,9 @@ IMAGE_INSTALL += "kernel-modules"
 IMAGE_INSTALL += "ethtool pciutils"
 IMAGE_INSTALL += "strace"
 IMAGE_INSTALL += "linuxptp"
-IMAGE_INSTALL += "libstdc++"
-IMAGE_INSTALL += "dmidecode"
 
 IMAGE_INSTALL += "nodejs"
-IMAGE_INSTALL += "connman wireless-tools wpa-supplicant bluez4"
+IMAGE_INSTALL += "wireless-tools wpa-supplicant bluez4"
 IMAGE_INSTALL += "ppp openssh"
 
 IMAGE_INSTALL += "linux-firmware-iwlwifi-6000g2a-6"
