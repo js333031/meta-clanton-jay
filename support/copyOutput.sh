@@ -2,18 +2,18 @@
 BUILD_OUT_DIR=`pwd`/tmp/deploy/images
 DST_DIR=''
 if [ -n "$1" ]; then
-   echo "arg 1 is $1 - this is the destination"
+   echo "destination is $1"
    DST_DIR="$1"
 else
-   echo "arg 1 is blank - please specify"
+   echo "arg 1 is blank - please specify destination path"
    exit 1
 fi
 
 if [ -n "$2" ]; then
-   echo "arg 2 is $2 (image type - medium or full)"
+   echo "arg 2 is $2 "
    IMG_TYPE="$2"
 else
-   echo "arg 2 is blank. Assuming full"
+   echo "arg 2 is blank. Assuming full, image type can be medium or full)"
 fi
 
 makecopy () 
