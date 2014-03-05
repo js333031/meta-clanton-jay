@@ -1,40 +1,40 @@
-#!/bin/sh
-BUILD_OUT_DIR=`pwd`/tmp/deploy/images
-DST_DIR=''
-if [ -n "$1" ]; then
-   echo "arg 1 is $1 - this is the destination"
-   DST_DIR="$1"
+#!/bin/bash
+
+if [[ -z "$1" ]]; then 
+   echo "First argument is not set. It must be destination";
 else
-   echo "arg 1 is blank - please specify"
-   exit 1
+   DST_DIR=$1;
 fi
 
-if [ -n "$2" ]; then
-   echo "arg 2 is $2 (image type - medium or full)"
-   IMG_TYPE="$2"
+if [[ -z "$2" ]]; then
+   echo "Second argument is not set. Continuing, assuming it is full";
+   IMG_TYPE="full";
 else
-   echo "arg 2 is blank. Assuming full"
+   IMG_TYPE=$2;
 fi
 
-makecopy () 
-{
-	cp -r $BUILD_OUT_DIR/boot $DST_DIR
-		cp $BUILD_OUT_DIR/bzImage $DST_DIR
-		cp $BUILD_OUT_DIR/core-image-minimal-initramfs-clanton.cpio.gz $DST_DIR
-		cp $BUILD_OUT_DIR/grub.efi $DST_DIR
+SRC_DIR="`pwd`/tmp/deploy/images"
 
+doCopy() {
+	cp -r $SRC_DIR/boot $DST_DIR
+		cp $SRC_DIR/bzImage $DST_DIR/
+		cp $SRC_DIR/core-image-minimal-initramfs-clanton.cpio.gz $DST_DIR/
+		cp $SRC_DIR/grub.efi $DST_DIR/
 	case "$IMG_TYPE" in
-		medium)
-			cp $BUILD_OUT_DIR/image-medium-clanton.ext3 $DST_DIR/image-full-clanton.ext3
+		"full")
+			cp $SRC_DIR/image-full-clanton.ext3 $DST_DIR/
 			;;
-		full)
-			cp $BUILD_OUT_DIR/image-full-clanton.ext3 $DST_DIR/image-full-clanton.ext3 
+		"medium")
+			cp $SRC_DIR/image-medium-clanton.ext3 $DST_DIR/image-full-clanton.ext3
 			;;
-		*)
-			cp $BUILD_OUT_DIR/image-full-clanton.ext3 $DST_DIR/image-full-clanton.ext3
+                "sdk")
+			cp $SRC_DIR/image-sdk-clanton.ext3 $DST_DIR/image-full-clanton.ext3
 			;;
 		esac
 }
 
-makecopy
-
+if [ -d "$SRC_DIR" ]; then
+  doCopy
+else
+  echo "Source dir '$SRC_DIR' does not exist";
+fi
